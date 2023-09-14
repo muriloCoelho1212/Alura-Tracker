@@ -15,7 +15,7 @@
     import { defineComponent, PropType} from 'vue';
     import Cronometro from './cronometro.vue';
     import ITarefa from '@/interfaces/Itarefa';
-import Box from './box.vue';
+    import Box from './box.vue';
 
     export default defineComponent({
         name: 'TarefaLista',

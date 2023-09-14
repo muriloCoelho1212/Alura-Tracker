@@ -60,10 +60,12 @@
   main{
     --bg-primary: #fff;
     --text-primary: #000;
+    --bg-box: #d6d6d6;
   }
   main.modo-escuro{
     --bg-primary: #2b2d42;
     --text-primary: #ddd;
+    --bg-box: #485383;
   }
   .conteudo{
     background-color: var(--bg-primary);
