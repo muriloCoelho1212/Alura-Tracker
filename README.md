@@ -1,24 +1,26 @@
-# alura-tracker
+# Alura Tracker
 
-## Project setup
-```
-npm install
-```
+<p>
+    <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#curso">Curso</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <a href="#projeto">Projeto</a>
+</p>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+---
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Tecnologias
 
-### Lints and fixes files
-```
-npm run lint
-```
+Tecnologias utilizadas no desenvolvimento do projeto:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- VueJS
+- TypeScript (4.5.5)
+
+## Curso
+
+Você pode encontrar o curso utilizado para desenvolver esse projeto [aqui](https://cursos.alura.com.br/course/vue3-comecando-framework)
+
+## Projeto
+
+Projeto online hospedado no Vercel: https://alura-tracker-theta-flame.vercel.app/
+
+---
