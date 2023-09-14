@@ -37,7 +37,7 @@
     })
 </script>
 
-<style>
+<style scoped>
     header {
         padding: 1rem;
         background: #0d3b66;
