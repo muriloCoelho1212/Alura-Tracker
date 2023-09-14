@@ -12,7 +12,7 @@
 
 Tecnologias utilizadas no desenvolvimento do projeto:
 
-- VueJS
+- Vue.JS (Vue3)
 - TypeScript (4.5.5)
 
 ## Curso
