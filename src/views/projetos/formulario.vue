@@ -14,8 +14,9 @@
 <script lang="ts">
     import { defineComponent } from 'vue';
     import { useStore } from '@/store'
-    import { ADICIONA_PROJETO, EDITA_PROJETO, NOTIFICAR } from '@/store/mutations';
-import { TipoNotificacao } from '@/interfaces/Inotificacoes';
+    import { ADICIONA_PROJETO, EDITA_PROJETO } from '@/store/mutations';
+    import { TipoNotificacao } from '@/interfaces/Inotificacoes';
+    import useNotificador from '@/hooks/notificador'
 
     export default defineComponent({
         name: 'FormView',
@@ -46,18 +47,16 @@ import { TipoNotificacao } from '@/interfaces/Inotificacoes';
                     this.store.commit(ADICIONA_PROJETO, this.nomeProjeto)
                 }
                 this.nomeProjeto = '',
-                this.store.commit(NOTIFICAR, {
-                    titulo: 'Um novo projeto foi adicionado',
-                    texto: 'Pronto... Seu projeto já está pronto para receber tarefas',
-                    tipo: TipoNotificacao.SUCESSO
-                })
+                this.notificar(TipoNotificacao.SUCESSO, 'Excelente!', 'Seu projeto foi adicionado a lista com sucesso!')
                 this.$router.push('/projetos')
-            }
+            },
         },
         setup(){
             const store = useStore()
+            const { notificar } = useNotificador()
             return {
-                store
+                store,
+                notificar
             }
         }
     })
