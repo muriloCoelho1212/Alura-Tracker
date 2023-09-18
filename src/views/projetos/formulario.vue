@@ -12,11 +12,12 @@
     </section>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useStore } from '@/store'
 import { TipoNotificacao } from '@/interfaces/Inotificacoes';
 import useNotificador from '@/hooks/notificador'
 import { ALTERAR_PROJETOS, CADASTRAR_PROJETOS } from '@/store/tipo-acoes';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
     name: 'FormView',
@@ -25,41 +26,41 @@ export default defineComponent({
             type: String
         }
     },
-    mounted() {
-        if (this.id) {
-            const projeto = this.store.state.projeto.projetos.find(proj => proj.id == this.id)
-            this.nomeProjeto = projeto?.nome || ''
-        }
-    },
-    data() {
-        return {
-            nomeProjeto: ''
-        }
-    },
-    methods: {
-        salvar() {
-            if (this.id) {
-                this.store.dispatch(ALTERAR_PROJETOS, {
-                    id: this.id,
-                    nome: this.nomeProjeto
-                }).then(() => this.comSucesso())
-            } else {
-                this.store.dispatch(CADASTRAR_PROJETOS, this.nomeProjeto)
-                    .then(() => this.comSucesso())
-            }
-        },
-        comSucesso() {
-            this.nomeProjeto = ''
-            this.notificar(TipoNotificacao.SUCESSO, 'Excelente!', 'Seu projeto foi adicionado a lista com sucesso!')
-            this.$router.push('/projetos')
-        }
-    },
-    setup() {
+    setup(props) {
+        const router = useRouter()
+
         const store = useStore()
         const { notificar } = useNotificador()
+
+        const nomeProjeto = ref("")
+
+        if (props.id) {
+            const projeto = store.state.projeto.projetos.find(proj => proj.id == props.id)
+            nomeProjeto.value = projeto?.nome || ''
+        }
+
+        const comSucesso = () => {
+            nomeProjeto.value = ''
+            notificar(TipoNotificacao.SUCESSO, 'Excelente!', 'Seu projeto foi adicionado a lista com sucesso!')
+            router.push('/projetos')
+        }
+
+        const salvar = () => {
+            if (props.id) {
+                store.dispatch(ALTERAR_PROJETOS, {
+                    id: props.id,
+                    nome: nomeProjeto.value
+                }).then(() => comSucesso())
+            } else {
+                store.dispatch(CADASTRAR_PROJETOS, nomeProjeto.value)
+                    .then(() => comSucesso())
+            }
+        }
+
+
         return {
-            store,
-            notificar
+            nomeProjeto,
+            salvar
         }
     }
 })

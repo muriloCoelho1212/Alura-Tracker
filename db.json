@@ -2,15 +2,11 @@
   "projetos": [
     {
       "id": 1,
-      "nome": "Alura Tracker"
+      "nome": "Alura Tracker 2.0"
     },
     {
-      "nome": "ByteBank",
-      "id": 2
-    },
-    {
-      "id": 3,
-      "nome": "Teste"
+      "id": 2,
+      "nome": "ByteBank v2"
     }
   ],
   "tarefas": [
@@ -49,6 +45,20 @@
         "nome": "Alura Tracker"
       },
       "id": 4
+    },
+    {
+      "duracaoEmSegundos": 1,
+      "descricao": "teste",
+      "id": 5
+    },
+    {
+      "duracaoEmSegundos": 2,
+      "descricao": "teste3",
+      "projeto": {
+        "id": 2,
+        "nome": "ByteBank v2"
+      },
+      "id": 6
     }
   ]
 }
