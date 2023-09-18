@@ -8,34 +8,35 @@
                 <div class="select">
                     <select v-model="idProjeto">
                         <option value="">Selecione o projeto</option>
-                        <option :value="projeto.id" v-for="projeto in projetos" :key="projeto.id">{{ projeto.nome }}</option>
+                        <option :value="projeto.id" v-for="projeto in projetos" :key="projeto.id">{{ projeto.nome }}
+                        </option>
                     </select>
                 </div>
             </div>
             <div class="column">
-                <TemporizadorForm @ao-temporizador-finalizado="finalizarTarefa"/>
+                <TemporizadorForm @ao-temporizador-finalizado="finalizarTarefa" />
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-    import { defineComponent, computed } from 'vue';
-    import TemporizadorForm from './temporizador.vue'
-    import { useStore } from 'vuex'
-    import { key } from '@/store'
+import { defineComponent, computed } from 'vue';
+import TemporizadorForm from './temporizador.vue'
+import { useStore } from 'vuex'
+import { key } from '@/store'
 
-    export default defineComponent({
+export default defineComponent({
     name: 'FormPrincipal',
     emits: ["aoSalvarTarefa"],
-    components: { TemporizadorForm},
-    data(){
+    components: { TemporizadorForm },
+    data() {
         return {
             descricao: '',
             idProjeto: ''
         }
     },
     methods: {
-        finalizarTarefa(tempoDecorrido: number): void{
+        finalizarTarefa(tempoDecorrido: number): void {
             this.$emit("aoSalvarTarefa", {
                 duracaoEmSegundos: tempoDecorrido,
                 descricao: this.descricao,
@@ -44,17 +45,17 @@
             this.descricao = ''
         }
     },
-    setup(){
+    setup() {
         const store = useStore(key)
         return {
-            projetos: computed(() => store.state.projetos)
+            projetos: computed(() => store.state.projeto.projetos)
         }
     }
 })
 </script>
 <style scoped>
-    .formulario{
-        color: var(--text-primary);
-        background-color: var(--bg-primary);
-    }
+.formulario {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+}
 </style>
