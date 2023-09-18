@@ -13,7 +13,7 @@
     {
       "id": 1,
       "duracaoEmSegundos": 120,
-      "descricao": "Estudando Vue 3",
+      "descricao": "Estudando VueJS 3",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker"
@@ -59,6 +59,15 @@
         "nome": "ByteBank v2"
       },
       "id": 6
+    },
+    {
+      "duracaoEmSegundos": 1,
+      "descricao": "teste1",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker 2.0"
+      },
+      "id": 7
     }
   ]
 }

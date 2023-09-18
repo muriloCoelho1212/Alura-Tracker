@@ -1,10 +1,18 @@
 <template>
-  <div class="column is-three-quarter conteudo">
+  <div class="column is-three-quarter conteudo p-5">
     <FormPrincipal @aoSalvarTarefa="salvarTarefa" />
     <div class="lista">
       <Box v-if="listaEstaVazia">
         Você não está muito produtivo hoje...
       </Box>
+      <div class="field">
+        <p class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Encontre uma tarefa..." v-model="filtro">
+          <span class="icon is-small is-left">
+            <i class="fas fa-search"></i>
+          </span>
+        </p>
+      </div>
       <Tarefa v-for="(tarefa, index) in tarefas" :key="index" :tarefa="tarefa" @aoTarefaClicada="selecionarTarefa" />
       <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
         <div class="modal-background"></div>
@@ -28,7 +36,7 @@
 </template>
   
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref, watchEffect } from 'vue';
 import FormPrincipal from '../components/formulario.vue'
 import Tarefa from '../components/tarefa.vue';
 import Box from '../components/box.vue';
@@ -58,7 +66,7 @@ export default defineComponent({
     fecharModal() {
       this.tarefaSelecionada = null
     },
-    alterarTarefa(){
+    alterarTarefa() {
       this.store.dispatch(ALTERAR_TAREFAS, this.tarefaSelecionada)
         .then(() => this.fecharModal())
     }
@@ -72,9 +80,17 @@ export default defineComponent({
     const store = useStore()
     store.dispatch(OBTER_TAREFAS)
     store.dispatch(OBTER_PROJETOS)
+
+    const filtro = ref("")
+
+    watchEffect(() => {
+      store.dispatch(OBTER_TAREFAS, filtro.value)
+    })
+
     return {
       tarefas: computed(() => store.state.tarefa.tarefas),
-      store
+      store,
+      filtro
     }
   }
 });
